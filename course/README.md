@@ -57,4 +57,30 @@ Nous déléguons à la base de données la suppression des enregistrements enfan
 > :thumbsdown: : Moins de contrôle sur ce qui est affecté par la commande.
 > :thumbsdown: : Comme pour l'élément précédent, il peut y avoir une perte de performance.
 
+### Specification Arg Resolver
+il facilite l'utilisation d'arguments plus élaborés pour les recherches dans les bases de données.
 
+#### Ajoute de la dependence maven
+```xml
+<!-- https://mvnrepository.com/artifact/net.kaczmarzyk/specification-arg-resolver -->
+<dependency>
+  <groupId>net.kaczmarzyk</groupId>
+  <artifactId>specification-arg-resolver</artifactId>
+  <version>2.6.3</version>
+</dependency>
+```
+#### Crée la configuration ResolverConfig
+> ResolverConfig extends WebMvcConfigurationSupport
+
+#### Crée le fichier et l'objet pour les "specifications"
+> SpecificationTemplate.java
+> public interface CourseSpec extends Specification<CourseModel> {}
+
+#### Étendre l'exécuteur de spécification JPA
+> extends JpaRepository<UserModel, UUID>, ***JpaSpecificationExecutor\<UserModel\>***
+  
+#### Utilization
+```java
+@GetMapping
+    public ResponseEntity<List<CourseModel>> getAllCourses(SpecificationTemplate.CourseSpec spec) {  
+```
