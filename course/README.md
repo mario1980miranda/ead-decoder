@@ -84,3 +84,8 @@ il facilite l'utilisation d'arguments plus élaborés pour les recherches dans l
 @GetMapping
     public ResponseEntity<List<CourseModel>> getAllCourses(SpecificationTemplate.CourseSpec spec) {  
 ```
+<https://docs.oracle.com/javaee/7/api/javax/persistence/criteria/CriteriaBuilder.html#isMember-E-javax.persistence.criteria.Expression->
+<https://docs.oracle.com/javaee/7/api/javax/persistence/criteria/CriteriaQuery.html#distinct-boolean->
+
+
+  
