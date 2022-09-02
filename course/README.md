@@ -91,5 +91,8 @@ il facilite l'utilisation d'arguments plus élaborés pour les recherches dans l
 <https://docs.oracle.com/javaee/7/api/javax/persistence/criteria/CriteriaQuery.html#distinct-boolean->
 
 ### ISO-8601 Date formate
+  
+> yyyy-MM-dd'T'HH:mm:ss'Z'
+  
 <https://www.iso.org/iso-8601-date-and-time-format.html>
   
