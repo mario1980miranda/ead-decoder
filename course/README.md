@@ -49,13 +49,15 @@ int deleteDeactivatedUsers();
 ## Suppression des donnés
 ### @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, ***cascade = CascadeType.ALL, orphanRemoval = true***)
 Nous laissons à la "JPA" la responsabilité d'effacer les données liées.
-> :thumbsdown: : Perte de performances possible car JPA a tendance à créer une requête pour chaque enregistrement enfant.
+> :thumbsdown: Perte de performances possible car JPA a tendance à créer une requête pour chaque enregistrement enfant.
 
 ### @OnDelete(action = OnDeleteAction.CASCADE)
 Nous déléguons à la base de données la suppression des enregistrements enfants.
-> :thumbsup: : Meilleur performance, si on compare avec **CascadeType.ALL**.
-> :thumbsdown: : Moins de contrôle sur ce qui est affecté par la commande.
-> :thumbsdown: : Comme pour l'élément précédent, il peut y avoir une perte de performance.
+> :thumbsup: Meilleur performance, si on compare avec **CascadeType.ALL**.
+
+> :thumbsdown: Moins de contrôle sur ce qui est affecté par la commande.
+
+> :thumbsdown: Comme pour l'élément précédent, il peut y avoir une perte de performance.
 
 ### Specification Arg Resolver
 il facilite l'utilisation d'arguments plus élaborés pour les recherches dans les bases de données.
