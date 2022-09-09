@@ -139,7 +139,7 @@ public class UserController {
 
             userService.save(userModel);
 
-            log.debug("PUT updateUser user updated successfully userModel {}", userModel);
+            log.debug("PUT updateUser user updated successfully userId {}", userModel.getUserId());
 
             return ResponseEntity.status(HttpStatus.OK).body("Password updated successfully.");
         }
@@ -167,7 +167,7 @@ public class UserController {
 
             userService.save(userModel);
 
-            log.debug("PUT updateUser user image updated successfully userModel {}", userModel);
+            log.debug("PUT updateUser user image updated successfully userId {}", userModel.getUserId());
 
             return ResponseEntity.status(HttpStatus.OK).body(userModel);
         }

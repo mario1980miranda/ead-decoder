@@ -53,7 +53,7 @@ public class AuthenticationController {
 
         userService.save(userModel);
 
-        log.debug("POST registerUser userModel saved {} ", userModel.toString());
+        log.debug("POST registerUser userModel saved userId {} ", userModel.getUserId());
         log.info("User saved successfully {}", userModel.getUserId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userModel);

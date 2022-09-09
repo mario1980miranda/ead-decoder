@@ -1,2 +1,4 @@
-package com.ead.authuser.services;public interface UserCourseService {
+package com.ead.authuser.services;
+
+public interface UserCourseService {
 }
