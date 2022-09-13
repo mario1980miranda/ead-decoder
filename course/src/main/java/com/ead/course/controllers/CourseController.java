@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,10 +79,24 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<CourseModel>> getAllCourses(SpecificationTemplate.CourseSpec spec,
-                                                           @PageableDefault(page = 0, size = 10, sort = "courseId", direction = Sort.Direction.ASC)
-                                                           Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll(spec, pageable));
+    public ResponseEntity<Page<CourseModel>> getAllCourses(
+            SpecificationTemplate.CourseSpec spec,
+            @PageableDefault(page = 0, size = 10, sort = "courseId", direction = Sort.Direction.ASC)
+            Pageable pageable,
+            @RequestParam(required = false) UUID userId
+    ) {
+
+        Page<CourseModel> coursesModelPage = null;
+
+        if (userId != null) {
+
+            coursesModelPage = courseService.findAll(SpecificationTemplate.courseUserId(userId).and(spec), pageable);
+        } else {
+
+            coursesModelPage = courseService.findAll(spec, pageable);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(coursesModelPage);
     }
 
     @GetMapping("/{courseId}")

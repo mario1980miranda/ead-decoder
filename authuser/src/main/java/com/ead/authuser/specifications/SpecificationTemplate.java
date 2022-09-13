@@ -28,7 +28,6 @@ public class SpecificationTemplate {
             Join<UserModel, UserCourseModel> userProd = root.join("userCourses");
             return cb.equal(userProd.get("courseId"), courseId);
         };
-
     }
     
 }
