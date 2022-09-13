@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @Log4j2
 @Component
-public class CourseClient {
+public class AuthUserClient {
 
     @Autowired
     UtilsService utilsService;
@@ -58,6 +58,13 @@ public class CourseClient {
         log.info("Ending request /users courseId {}", courseId);
 
         return result.getBody();
+    }
+
+    public ResponseEntity<UserDto> getOneUserById(UUID userId) {
+
+        String url = REQUEST_URL_AUTHUSER + "/users/" + userId;
+
+        return restTemplate.exchange(url, HttpMethod.GET, null, UserDto.class);
     }
 
 }
