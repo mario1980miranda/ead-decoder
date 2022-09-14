@@ -44,7 +44,7 @@ public class UserCourseController {
         return ResponseEntity.status(HttpStatus.OK).body(courseClient.getAllCoursesByUser(userId, pageable));
     }
 
-    @PostMapping("/users/{userId}/course/subscription")
+    @PostMapping("/users/{userId}/courses/subscription")
     public ResponseEntity<Object> saveSubscriptionUserInCourse(
             @PathVariable(value = "userId")
             UUID userId,
