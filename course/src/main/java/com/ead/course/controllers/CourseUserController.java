@@ -47,6 +47,7 @@ public class CourseUserController {
         Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
 
         if (!courseModelOptional.isPresent()) {
+            log.warn("Course not found {}", courseId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found.");
         }
 
@@ -62,14 +63,18 @@ public class CourseUserController {
             SubscriptionDto subscriptionDto
     ) {
 
+        log.debug("POST saveSubscriptionUserInCourse courseId {}", courseId);
+
         ResponseEntity<UserDto> responseUser = null;
         Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
 
         if (!courseModelOptional.isPresent()) {
+            log.warn("Course not found courseId", courseId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found.");
         }
 
         if (courseUserService.existsByCourseAndUserId(courseModelOptional.get(), subscriptionDto.getUserId())) {
+            log.warn("Error: subscription already exists!", courseModelOptional.get().getCourseId());
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: subscription already exists!");
         }
 
@@ -78,20 +83,21 @@ public class CourseUserController {
             responseUser = authUserClient.getOneUserById(subscriptionDto.getUserId());
 
             if (responseUser.getBody().getUserStatus().equals(UserStatus.BLOCKED)) {
-
                 log.warn("User is blocked {}.", subscriptionDto.getUserId());
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("User is blocked.");
             }
 
         } catch (HttpStatusCodeException e) {
-
             if (e.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                log.warn("User not found {}", subscriptionDto.getUserId());
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
             }
         }
 
         // CourseUserModel courseUserModel = courseUserService.save(courseModelOptional.get().convertToCourseUserModel(subscriptionDto.getUserId()));
         CourseUserModel courseUserModel = courseUserService.saveAndSendSubscriptionUserInCourse(courseModelOptional.get().convertToCourseUserModel(subscriptionDto.getUserId()));
+
+        log.debug("CourseUser created successfully courseUser->Id", courseUserModel.getId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(courseUserModel);
     }
@@ -102,11 +108,16 @@ public class CourseUserController {
             UUID userId
     ) {
 
+        log.debug("DELETE deleteCourseUserByUser userId {}", userId);
+
         if (!courseUserService.existsByUserId(userId)) {
+            log.warn("CourseUser not found by user {}", userId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("CourseUser not found.");
         }
 
         courseUserService.deleteCourseUserByUser(userId);
+
+        log.info("CourseUser deleted successfully.");
 
         return ResponseEntity.status(HttpStatus.OK).body("CourseUser deleted successfully.");
     }
