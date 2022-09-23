@@ -4,6 +4,7 @@ import com.ead.course.dtos.SubscriptionDto;
 import com.ead.course.models.CourseModel;
 import com.ead.course.services.CourseService;
 import com.ead.course.services.UserService;
+import com.ead.course.specifications.SpecificationTemplate;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -25,10 +26,11 @@ public class CourseUserController {
     @Autowired
     CourseService courseService;
     @Autowired
-    UserService courseUserService;
+    UserService userService;
 
     @GetMapping("/courses/{courseId}/users")
     public ResponseEntity<Object> getAllUsersByCourse(
+            SpecificationTemplate.UserSpec spec,
             @PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC)
             Pageable pageable,
             @PathVariable(value = "courseId")
@@ -44,7 +46,7 @@ public class CourseUserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found.");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body("STATE TRANSFER PATTERN");
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll(SpecificationTemplate.userCourseId(courseId).and(spec), pageable));
     }
 
     @PostMapping("/courses/{courseId}/users/subscription")

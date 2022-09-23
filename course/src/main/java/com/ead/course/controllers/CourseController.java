@@ -102,7 +102,18 @@ public class CourseController {
             @RequestParam(required = false) UUID userId
     ) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll(spec, pageable));
+        log.debug("GET getAllCourses userId {}", userId);
+
+        if (userId != null) {
+
+            return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll(SpecificationTemplate.courseUserId(userId).and(spec), pageable));
+
+        } else {
+
+            return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll(spec, pageable));
+
+        }
+
     }
 
     @GetMapping("/{courseId}")
