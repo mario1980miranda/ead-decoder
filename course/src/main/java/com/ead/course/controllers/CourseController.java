@@ -102,17 +102,7 @@ public class CourseController {
             @RequestParam(required = false) UUID userId
     ) {
 
-        Page<CourseModel> coursesModelPage = null;
-
-        if (userId != null) {
-
-            coursesModelPage = courseService.findAll(SpecificationTemplate.courseUserId(userId).and(spec), pageable);
-        } else {
-
-            coursesModelPage = courseService.findAll(spec, pageable);
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(coursesModelPage);
+        return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll(spec, pageable));
     }
 
     @GetMapping("/{courseId}")
