@@ -160,3 +160,6 @@ log.debug("POST registerUser userDto received {} ", userDto.toString());
 log.warn("POST registerUser Username {} is already taken!", userDto.getUsername());
 log.info("User saved successfully {}", userModel.getUserId());
 ```
+```
+mvn spring-boot:run -Dspring-boot.run.arguments=--logging.level.com.ead=TRACE
+```
