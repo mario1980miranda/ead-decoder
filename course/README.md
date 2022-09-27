@@ -122,3 +122,41 @@ public class DateConfig {
     }
 }
 ```
+### Log avec Log4j2
+#### Dépendances et exclusions
+> pom.xml
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+  <exclusions>
+    <exclusion>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+    </exclusion>
+  </exclusions>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-log4j2</artifactId>
+</dependency>
+```
+
+> application.yaml
+```yaml
+logging:
+  level:
+    com.ead: trace
+    root: info
+    org.springframework.web: debug
+    org.hibernate: info
+```
+#### Utilisation
+```java
+private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(LogExample.class);
+```
+```java
+log.debug("POST registerUser userDto received {} ", userDto.toString());
+log.warn("POST registerUser Username {} is already taken!", userDto.getUsername());
+log.info("User saved successfully {}", userModel.getUserId());
+```
