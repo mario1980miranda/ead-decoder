@@ -163,3 +163,28 @@ log.info("User saved successfully {}", userModel.getUserId());
 ```
 mvn spring-boot:run -Dspring-boot.run.arguments=--logging.level.com.ead=TRACE
 ```
+## Spring-AMQP
+<https://docs.spring.io/spring-amqp/docs/current/reference/html/>
+>pom.xml
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+```
+>application.yaml
+```yaml
+ead:
+  api:
+    url:
+      authuser: 'http://ead-authuser-service/ead-authuser'
+  broker:
+    exchange:
+      userEventExchange: ead.userevent
+    queue:
+      userEventQueue:
+        name: ead.userevent.ms.course
+spring:
+  rabbitmq:
+    addresses: amqps://user:pass@fly.rmq.cloudamqp.com/user
+```
