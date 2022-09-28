@@ -3,7 +3,7 @@ package com.ead.authuser.services.impl;
 import com.ead.authuser.clients.CourseClient;
 import com.ead.authuser.enums.ActionType;
 import com.ead.authuser.models.UserModel;
-import com.ead.authuser.models.publishers.UserEventPublisher;
+import com.ead.authuser.publishers.UserEventPublisher;
 import com.ead.authuser.repositories.UserRepository;
 import com.ead.authuser.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
