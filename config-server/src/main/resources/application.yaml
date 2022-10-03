@@ -1,0 +1,20 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: ead-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/mario1980miranda/ead-config-server-repo
+          default-label: main
+          username: mario1980miranda
+          password: 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
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost
