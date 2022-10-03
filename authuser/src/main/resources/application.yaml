@@ -51,7 +51,7 @@ eureka:
 resilience4j:
   circuitbreaker:
     instances:
-      circuitbreaker-instance:
+      circuitbreakerInstance:
         sliding-window-size: 30
         permitted-number-of-calls-in-half-open-state: 2
         sliding-window-type: TIME_BASED
