@@ -11,7 +11,7 @@ spring:
           uri: https://github.com/mario1980miranda/ead-config-server-repo
           default-label: main
           username: mario1980miranda
-          password: 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
+          password: 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
 eureka:
   client:
     serviceUrl:
