@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ead-notification-service
+  config:
+    import: 'configserver:'
+  cloud:
+    config:
+      discovery:
+        serviceId: ead-config-server
