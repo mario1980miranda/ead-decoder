@@ -86,7 +86,7 @@ public class CourseUserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Subscription already exists");
         }
 
-        courseService.saveSubscriptionUserInCourse(courseModelOptional.get().getCourseId(), userModelOptional.get().getUserId());
+        courseService.saveSubscriptionUserInCourseAndSendNotification(courseModelOptional.get(), userModelOptional.get());
 
         log.debug("Subscription created successfully");
 
