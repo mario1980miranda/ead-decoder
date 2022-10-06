@@ -12,9 +12,10 @@ spring:
           default-label: main
           username: mario1980miranda
           password: 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
+ead:
 eureka:
   client:
     serviceUrl:
-      defaultZone: 'http://localhost:8761/eureka'
+      defaultZone: 'http://${ead.serviceRegistry.username}:${ead.serviceRegistry.password}@localhost:8761/eureka'
   instance:
     hostname: localhost
