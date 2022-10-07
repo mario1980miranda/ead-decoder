@@ -12,7 +12,15 @@ spring:
           default-label: main
           username: mario1980miranda
           password: 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
+
 ead:
+  configServer:
+    username: configserver
+    password: 'ead123cs'
+  serviceRegistry:
+    username: serviceregistry
+    password: 'ead123sr'
+
 eureka:
   client:
     serviceUrl:
